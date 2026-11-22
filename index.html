@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrepaPráctica - Laboratorio de Contabilidad</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navegación Principal -->
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-xl shadow-inner">
+                    <i data-lucide="calculator" class="w-7 h-7 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight flex items-center gap-2">
+                        PrepaPráctica <span class="text-xs font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 px-2.5 py-0.5 rounded-full border border-blue-400/30">Contabilidad</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Simulador Interactivo del Ciclo Contable Básico</p>
+                </div>
+            </a>
+
+            <nav class="flex flex-wrap items-center justify-center gap-2">
+                <a href="index.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-blue-600 text-white shadow">Inicio</a>
+                <a href="caso1.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 1</a>
+                <a href="caso2.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 2</a>
+                <a href="caso3.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 3</a>
+                <a href="caso4.html" class="px-3.5 py-2 rounded-lg text-sm font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 4</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+
+        <!-- Hero Section -->
+        <section class="bg-white rounded-3xl shadow-sm border border-slate-200 p-8 md:p-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div class="space-y-4 max-w-2xl">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+                    <i data-lucide="graduation-cap" class="w-4 h-4"></i> Bachillerato y Preparatoria
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                    Domina el Ciclo Contable paso a paso sin recibir la respuesta directa
+                </h2>
+                <p class="text-slate-600 text-base leading-relaxed">
+                    Practica el pase a <strong>Esquemas de Mayor (Cuentas T)</strong>, la elaboración del <strong>Balance de Comprobación</strong>, el <strong>Estado de Resultados</strong> y el <strong>Balance General</strong> a partir de asientos contables ya registrados.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-2 text-xs font-semibold">
+                    <span class="flex items-center gap-1.5 text-green-800 bg-green-100 px-3 py-1.5 rounded-lg border border-green-300">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-600"></span> Verde = Dato Correcto
+                    </span>
+                    <span class="flex items-center gap-1.5 text-red-800 bg-red-100 px-3 py-1.5 rounded-lg border border-red-300">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-600"></span> Rojo = Revisar cálculo o ubicación
+                    </span>
+                </div>
+            </div>
+
+            <!-- Panel Docente: Descarga de Claves -->
+            <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-md w-full lg:w-96 space-y-4">
+                <div class="flex items-center gap-2 text-blue-400">
+                    <i data-lucide="file-key" class="w-5 h-5"></i>
+                    <h3 class="font-bold text-sm uppercase tracking-wider">Claves de Respuestas</h3>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Descarga las hojas de solución completas (Cuentas T, Balance de Comprobación, Estado de Resultados y Balance General) para revisión docente o autoevaluación final.
+                </p>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button onclick="downloadKey(0)" class="bg-slate-800 hover:bg-slate-700 text-xs font-semibold py-2 px-3 rounded-lg border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i> Clave Caso 1
+                    </button>
+                    <button onclick="downloadKey(1)" class="bg-slate-800 hover:bg-slate-700 text-xs font-semibold py-2 px-3 rounded-lg border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i> Clave Caso 2
+                    </button>
+                    <button onclick="downloadKey(2)" class="bg-slate-800 hover:bg-slate-700 text-xs font-semibold py-2 px-3 rounded-lg border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i> Clave Caso 3
+                    </button>
+                    <button onclick="downloadKey(3)" class="bg-slate-800 hover:bg-slate-700 text-xs font-semibold py-2 px-3 rounded-lg border border-slate-700 flex items-center justify-center gap-1.5 transition">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-blue-400"></i> Clave Caso 4
+                    </button>
+                </div>
+                <button onclick="downloadAllKeys()" class="w-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 shadow">
+                    <i data-lucide="folder-down" class="w-4 h-4"></i> Descargar Todas las Claves (4 Casos)
+                </button>
+            </div>
+        </section>
+
+        <!-- Tarjetas de los 4 Casos Prácticos -->
+        <section class="space-y-4">
+            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <i data-lucide="layers" class="w-5 h-5 text-blue-600"></i> Selecciona un Caso Práctico para Comenzar
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Caso 1 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-5">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2.5 py-1 rounded-md">Caso Práctico 01</span>
+                            <span class="text-xs text-slate-500 font-medium">ISR: 3.0% | 6 Enunciados</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Comercializadora Horizonte Azul, S.A.</h4>
+                        <p class="text-sm text-slate-600">
+                            Operaciones de apertura en agosto: aportación de socios, compra de mercancía a crédito, venta a crédito con costo de ventas, pago de sueldos, compra de equipo de cómputo con préstamo bancario y provisión de ISR.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <a href="caso1.html" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+                            Practicar Caso 1 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="downloadKey(0)" class="text-xs font-semibold text-slate-600 hover:text-blue-600 flex items-center gap-1">
+                            <i data-lucide="download" class="w-4 h-4"></i> Clave (.txt)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Caso 2 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-5">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md">Caso Práctico 02</span>
+                            <span class="text-xs text-slate-500 font-medium">ISR: 3.0% | 6 Enunciados</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">TecnoSoluciones del Norte, S.A.</h4>
+                        <p class="text-sm text-slate-600">
+                            Empresa comercializadora de equipo de cómputo en noviembre: aportación inicial, compras a proveedores, ventas a clientes, pago de nómina administrativa, adquisición de mobiliario con crédito y provisión de ISR.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <a href="caso2.html" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+                            Practicar Caso 2 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="downloadKey(1)" class="text-xs font-semibold text-slate-600 hover:text-emerald-600 flex items-center gap-1">
+                            <i data-lucide="download" class="w-4 h-4"></i> Clave (.txt)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Caso 3 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-5">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-md">Caso Práctico 03</span>
+                            <span class="text-xs text-slate-500 font-medium">ISR: 2.0% | 6 Enunciados</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Mueblería El Roble, S.A.</h4>
+                        <p class="text-sm text-slate-600">
+                            Operaciones comerciales de septiembre: capital inicial en efectivo y muebles, compras a crédito, ventas de comedores a crédito, sueldos del personal, compra de maquinaria de carpintería y provisión de ISR.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <a href="caso3.html" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+                            Practicar Caso 3 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="downloadKey(2)" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 flex items-center gap-1">
+                            <i data-lucide="download" class="w-4 h-4"></i> Clave (.txt)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Caso 4 -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-5">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2.5 py-1 rounded-md">Caso Práctico 04</span>
+                            <span class="text-xs text-slate-500 font-medium">ISR: 2.5% | 6 Enunciados</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900">Distribuidora del Norte, S.A.</h4>
+                        <p class="text-sm text-slate-600">
+                            Cierre de ejercicio en diciembre: aportación de capital, adquisición de inventario a crédito, ventas a clientes, pago de sueldos, compra de equipo de transporte a largo plazo y provisión de ISR.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+                        <a href="caso4.html" class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition">
+                            Practicar Caso 4 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="downloadKey(3)" class="text-xs font-semibold text-slate-600 hover:text-amber-600 flex items-center gap-1">
+                            <i data-lucide="download" class="w-4 h-4"></i> Clave (.txt)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p><strong class="text-white">PrepaPráctica</strong> — Plataforma Interactiva de Contabilidad para Nivel Medio Superior.</p>
+            <p>Estructura multipágina lista para GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <script>
+        const KEYS_TEXT = [
+`====================================================================
+PREPAPRÁCTICA - CLAVE DE RESPUESTAS: CASO 1
+Empresa: Comercializadora Horizonte Azul, S.A.
+====================================================================
+1. CUENTAS T (MOVIMIENTOS Y SALDOS):
+- Caja y Bancos: Debe $190,000 | Haber $22,000 -> Saldo Deudor: $168,000
+- Almacén: Debe $135,000 ($95,000 + $40,000) | Haber $62,000 -> Saldo Deudor: $73,000
+- Clientes: Debe $140,000 | Haber $0 -> Saldo Deudor: $140,000
+- Equipo de Cómputo: Debe $35,000 | Haber $0 -> Saldo Deudor: $35,000
+- Proveedores: Debe $0 | Haber $40,000 -> Saldo Acreedor: $40,000
+- I.S.R. por pagar: Debe $0 | Haber $4,200 -> Saldo Acreedor: $4,200
+- Préstamo bancario: Debe $0 | Haber $35,000 -> Saldo Acreedor: $35,000
+- Capital Social: Debe $0 | Haber $285,000 -> Saldo Acreedor: $285,000
+- Ventas: Debe $0 | Haber $140,000 -> Saldo Acreedor: $140,000
+- Costo de Ventas: Debe $62,000 | Haber $0 -> Saldo Deudor: $62,000
+- Gasto por sueldos: Debe $22,000 | Haber $0 -> Saldo Deudor: $22,000
+- Gastos de I.S.R.: Debe $4,200 | Haber $0 -> Saldo Deudor: $4,200
+
+2. BALANCE DE COMPROBACIÓN:
+- Sumas Iguales Movimientos (Debe / Haber): $588,200 / $588,200
+- Sumas Iguales Saldos (Deudor / Acreedor): $504,200 / $504,200
+
+3. ESTADO DE RESULTADOS:
+- Ventas: $140,000
+- (-) Costo de Ventas: $62,000
+- (=) Utilidad Bruta: $78,000
+- (-) Gastos de Operación (Sueldos): $22,000
+- (=) Resultado antes de impuestos: $56,000
+- (-) Impuesto (ISR 3.0%): $4,200
+- (=) Utilidad del Ejercicio: $51,800
+
+4. BALANCE GENERAL:
+- Activo Circulante: Caja y Bancos ($168,000) + Almacén ($73,000) + Clientes ($140,000) = $381,000
+- Activo Fijo: Equipo de Cómputo ($35,000) = $35,000
+- TOTAL ACTIVO: $416,000
+- Pasivo Corto Plazo: Proveedores ($40,000) + ISR por pagar ($4,200) = $44,200
+- Pasivo Largo Plazo: Préstamo bancario ($35,000) = $35,000
+- Capital Contable: Capital Social ($285,000) + Utilidad del Ejercicio ($51,800) = $336,800
+- TOTAL PASIVO Y CAPITAL: $416,000`,
+
+`====================================================================
+PREPAPRÁCTICA - CLAVE DE RESPUESTAS: CASO 2
+Empresa: TecnoSoluciones del Norte, S.A.
+====================================================================
+1. CUENTAS T (MOVIMIENTOS Y SALDOS):
+- Caja y Bancos: Debe $220,000 | Haber $24,000 -> Saldo Deudor: $196,000
+- Almacén: Debe $165,000 ($120,000 + $45,000) | Haber $78,000 -> Saldo Deudor: $87,000
+- Clientes: Debe $160,000 | Haber $0 -> Saldo Deudor: $160,000
+- Mobiliario y Equipo: Debe $50,000 | Haber $0 -> Saldo Deudor: $50,000
+- Proveedores: Debe $0 | Haber $45,000 -> Saldo Acreedor: $45,000
+- I.S.R. por pagar: Debe $0 | Haber $4,800 -> Saldo Acreedor: $4,800
+- Préstamo bancario: Debe $0 | Haber $50,000 -> Saldo Acreedor: $50,000
+- Capital Social: Debe $0 | Haber $340,000 -> Saldo Acreedor: $340,000
+- Ventas: Debe $0 | Haber $160,000 -> Saldo Acreedor: $160,000
+- Costo de Ventas: Debe $78,000 | Haber $0 -> Saldo Deudor: $78,000
+- Gasto por sueldos: Debe $24,000 | Haber $0 -> Saldo Deudor: $24,000
+- Gastos de I.S.R.: Debe $4,800 | Haber $0 -> Saldo Deudor: $4,800
+
+2. BALANCE DE COMPROBACIÓN:
+- Sumas Iguales Movimientos (Debe / Haber): $701,800 / $701,800
+- Sumas Iguales Saldos (Deudor / Acreedor): $599,800 / $599,800
+
+3. ESTADO DE RESULTADOS:
+- Ventas: $160,000
+- (-) Costo de Ventas: $78,000
+- (=) Utilidad Bruta: $82,000
+- (-) Gastos de Operación (Sueldos): $24,000
+- (=) Resultado antes de impuestos: $58,000
+- (-) Impuesto (ISR 3.0%): $4,800
+- (=) Utilidad del Ejercicio: $53,200
+
+4. BALANCE GENERAL:
+- Activo Circulante: Caja y Bancos ($196,000) + Almacén ($87,000) + Clientes ($160,000) = $443,000
+- Activo Fijo: Mobiliario y Equipo ($50,000) = $50,000
+- TOTAL ACTIVO: $493,000
+- Pasivo Corto Plazo: Proveedores ($45,000) + ISR por pagar ($4,800) = $49,800
+- Pasivo Largo Plazo: Préstamo bancario ($50,000) = $50,000
+- Capital Contable: Capital Social ($340,000) + Utilidad del Ejercicio ($53,200) = $393,200
+- TOTAL PASIVO Y CAPITAL: $493,000`,
+
+`====================================================================
+PREPAPRÁCTICA - CLAVE DE RESPUESTAS: CASO 3
+Empresa: Mueblería El Roble, S.A.
+====================================================================
+1. CUENTAS T (MOVIMIENTOS Y SALDOS):
+- Caja y Bancos: Debe $180,000 | Haber $15,000 -> Saldo Deudor: $165,000
+- Almacén: Debe $130,000 ($95,000 + $35,000) | Haber $54,000 -> Saldo Deudor: $76,000
+- Clientes: Debe $120,000 | Haber $0 -> Saldo Deudor: $120,000
+- Maquinaria y Equipo: Debe $40,000 | Haber $0 -> Saldo Deudor: $40,000
+- Proveedores: Debe $0 | Haber $35,000 -> Saldo Acreedor: $35,000
+- I.S.R. por pagar: Debe $0 | Haber $2,400 -> Saldo Acreedor: $2,400
+- Préstamo bancario: Debe $0 | Haber $40,000 -> Saldo Acreedor: $40,000
+- Capital Social: Debe $0 | Haber $275,000 -> Saldo Acreedor: $275,000
+- Ventas: Debe $0 | Haber $120,000 -> Saldo Acreedor: $120,000
+- Costo de Ventas: Debe $54,000 | Haber $0 -> Saldo Deudor: $54,000
+- Gasto por sueldos: Debe $15,000 | Haber $0 -> Saldo Deudor: $15,000
+- Gastos de I.S.R.: Debe $2,400 | Haber $0 -> Saldo Deudor: $2,400
+
+2. BALANCE DE COMPROBACIÓN:
+- Sumas Iguales Movimientos (Debe / Haber): $541,400 / $541,400
+- Sumas Iguales Saldos (Deudor / Acreedor): $472,400 / $472,400
+
+3. ESTADO DE RESULTADOS:
+- Ventas: $120,000
+- (-) Costo de Ventas: $54,000
+- (=) Utilidad Bruta: $66,000
+- (-) Gastos de Operación (Sueldos): $15,000
+- (=) Resultado antes de impuestos: $51,000
+- (-) Impuesto (ISR 2.0%): $2,400
+- (=) Utilidad del Ejercicio: $48,600
+
+4. BALANCE GENERAL:
+- Activo Circulante: Caja y Bancos ($165,000) + Almacén ($76,000) + Clientes ($120,000) = $361,000
+- Activo Fijo: Maquinaria y Equipo ($40,000) = $40,000
+- TOTAL ACTIVO: $401,000
+- Pasivo Corto Plazo: Proveedores ($35,000) + ISR por pagar ($2,400) = $37,400
+- Pasivo Largo Plazo: Préstamo bancario ($40,000) = $40,000
+- Capital Contable: Capital Social ($275,000) + Utilidad del Ejercicio ($48,600) = $323,600
+- TOTAL PASIVO Y CAPITAL: $401,000`,
+
+`====================================================================
+PREPAPRÁCTICA - CLAVE DE RESPUESTAS: CASO 4
+Empresa: Distribuidora del Norte, S.A.
+====================================================================
+1. CUENTAS T (MOVIMIENTOS Y SALDOS):
+- Caja y Bancos: Debe $300,000 | Haber $32,000 -> Saldo Deudor: $268,000
+- Almacén: Debe $220,000 ($150,000 + $70,000) | Haber $92,000 -> Saldo Deudor: $128,000
+- Clientes: Debe $200,000 | Haber $0 -> Saldo Deudor: $200,000
+- Equipo de Transporte: Debe $60,000 | Haber $0 -> Saldo Deudor: $60,000
+- Proveedores: Debe $0 | Haber $70,000 -> Saldo Acreedor: $70,000
+- I.S.R. por pagar: Debe $0 | Haber $5,000 -> Saldo Acreedor: $5,000
+- Préstamo bancario: Debe $0 | Haber $60,000 -> Saldo Acreedor: $60,000
+- Capital Social: Debe $0 | Haber $450,000 -> Saldo Acreedor: $450,000
+- Ventas: Debe $0 | Haber $200,000 -> Saldo Acreedor: $200,000
+- Costo de Ventas: Debe $92,000 | Haber $0 -> Saldo Deudor: $92,000
+- Gasto por sueldos: Debe $32,000 | Haber $0 -> Saldo Deudor: $32,000
+- Gastos de I.S.R.: Debe $5,000 | Haber $0 -> Saldo Deudor: $5,000
+
+2. BALANCE DE COMPROBACIÓN:
+- Sumas Iguales Movimientos (Debe / Haber): $909,000 / $909,000
+- Sumas Iguales Saldos (Deudor / Acreedor): $785,000 / $785,000
+
+3. ESTADO DE RESULTADOS:
+- Ventas: $200,000
+- (-) Costo de Ventas: $92,000
+- (=) Utilidad Bruta: $108,000
+- (-) Gastos de Operación (Sueldos): $32,000
+- (=) Resultado antes de impuestos: $76,000
+- (-) Impuesto (ISR 2.5%): $5,000
+- (=) Utilidad del Ejercicio: $71,000
+
+4. BALANCE GENERAL:
+- Activo Circulante: Caja y Bancos ($268,000) + Almacén ($128,000) + Clientes ($200,000) = $596,000
+- Activo Fijo: Equipo de Transporte ($60,000) = $60,000
+- TOTAL ACTIVO: $656,000
+- Pasivo Corto Plazo: Proveedores ($70,000) + ISR por pagar ($5,000) = $75,000
+- Pasivo Largo Plazo: Préstamo bancario ($60,000) = $60,000
+- Capital Contable: Capital Social ($450,000) + Utilidad del Ejercicio ($71,000) = $521,000
+- TOTAL PASIVO Y CAPITAL: $656,000`
+        ];
+
+        function triggerDownload(filename, content) {
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadKey(idx) {
+            triggerDownload(`PrepaPractica_Clave_Caso_${idx + 1}.txt`, KEYS_TEXT[idx]);
+        }
+
+        function downloadAllKeys() {
+            triggerDownload(`PrepaPractica_Claves_4_Casos_Completos.txt`, KEYS_TEXT.join('\n\n\n'));
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>

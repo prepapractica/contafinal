@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso 2: TecnoSoluciones del Norte | PrepaPráctica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .acc-input { transition: all 0.2s ease-in-out; border: 1px solid #cbd5e1; background-color: #ffffff; }
+        .acc-input:focus { outline: none; border-color: #059669; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); }
+        .valid-cell { background-color: #dcfce7 !important; border-color: #16a34a !important; color: #14532d !important; font-weight: 600; }
+        .invalid-cell { background-color: #fee2e2 !important; border-color: #dc2626 !important; color: #7f1d1d !important; }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="bg-emerald-600 p-2 rounded-xl"><i data-lucide="calculator" class="w-6 h-6 text-white"></i></div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-extrabold tracking-tight">PrepaPráctica <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full">Caso 2</span></h1>
+                    <p class="text-xs text-slate-400">TecnoSoluciones del Norte, S.A.</p>
+                </div>
+            </a>
+            <nav class="flex flex-wrap items-center justify-center gap-2">
+                <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Inicio</a>
+                <a href="caso1.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 1</a>
+                <a href="caso2.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow">Caso 2</a>
+                <a href="caso3.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 3</a>
+                <a href="caso4.html" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition">Caso 4</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+            <div class="space-y-1">
+                <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2"><i data-lucide="info" class="w-4 h-4 text-emerald-600"></i> Validación por Colores (Sin mostrar respuestas)</h2>
+                <div class="flex flex-wrap items-center gap-3 text-xs font-medium">
+                    <span class="flex items-center gap-1.5 text-green-800 bg-green-100 px-2.5 py-1 rounded border border-green-300"><span class="w-2 h-2 rounded-full bg-green-600"></span> Verde: Correcto</span>
+                    <span class="flex items-center gap-1.5 text-red-800 bg-red-100 px-2.5 py-1 rounded border border-red-300"><span class="w-2 h-2 rounded-full bg-red-600"></span> Rojo: Revisar cálculo o cuenta</span>
+                </div>
+            </div>
+            <button onclick="downloadAnswerKey()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition shadow-sm">
+                <i data-lucide="download" class="w-4 h-4"></i> Descargar Clave de Respuestas (Caso 2)
+            </button>
+        </section>
+
+        <div id="feedback-banner" class="hidden rounded-xl p-4 border shadow-sm flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i data-lucide="lightbulb" class="w-5 h-5"></i>
+                <div><h4 id="feedback-title" class="font-bold text-sm"></h4><p id="feedback-text" class="text-xs mt-0.5"></p></div>
+            </div>
+            <button onclick="document.getElementById('feedback-banner').classList.add('hidden')" class="text-slate-500 hover:text-slate-800"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-800 text-white px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div><span class="text-xs font-semibold uppercase tracking-wider text-emerald-300">Caso Práctico 2 — Libro Diario</span><h2 class="text-xl font-bold">TecnoSoluciones del Norte, S.A.</h2></div>
+                <span class="text-xs bg-slate-700 px-3 py-1 rounded-full">Operaciones exentas de IVA</span>
+            </div>
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="text-sm font-bold uppercase text-slate-700 border-b pb-2">Enunciado del Caso</h3>
+                    <p id="case-intro" class="text-sm text-slate-600"></p>
+                    <ol id="case-statements" class="space-y-2 text-sm text-slate-700 list-decimal list-inside bg-slate-50 p-4 rounded-xl border border-slate-200"></ol>
+                </div>
+                <div class="lg:col-span-7 space-y-3">
+                    <h3 class="text-sm font-bold uppercase text-slate-700 border-b pb-2">Asientos Contables Realizados</h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-300">
+                        <table class="w-full text-sm text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-bold text-xs uppercase">
+                                    <th class="py-2 px-3 border-r border-slate-300 w-20 text-center">Fecha</th>
+                                    <th class="py-2 px-4 border-r border-slate-300">Cuenta</th>
+                                    <th class="py-2 px-3 border-r border-slate-300 w-28 text-right">Debe</th>
+                                    <th class="py-2 px-3 w-28 text-right">Haber</th>
+                                </tr>
+                            </thead>
+                            <tbody id="journal-tbody" class="divide-y divide-slate-200"></tbody>
+                            <tfoot id="journal-tfoot" class="bg-slate-100 font-bold border-t-2 border-slate-400"></tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paso 1 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div><span class="text-xs font-bold uppercase text-emerald-600">Paso 1</span><h2 class="text-lg font-bold text-slate-800">Esquemas de Libro Mayor (Cuentas T)</h2></div>
+                <div class="flex items-center gap-2">
+                    <button onclick="showHint('t')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800 hover:bg-amber-200">Pista</button>
+                    <button onclick="checkTAccounts()" class="px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow">Comprobar Cuentas T</button>
+                </div>
+            </div>
+            <div class="p-6"><div id="t-accounts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></div>
+        </section>
+
+        <!-- Paso 2 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div><span class="text-xs font-bold uppercase text-emerald-600">Paso 2</span><h2 class="text-lg font-bold text-slate-800">Balance de Comprobación</h2></div>
+                <div class="flex items-center gap-2">
+                    <button onclick="showHint('tb')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800 hover:bg-amber-200">Pista</button>
+                    <button onclick="checkTrialBalance()" class="px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow">Comprobar Balance</button>
+                </div>
+            </div>
+            <div class="p-6 overflow-x-auto">
+                <table class="w-full min-w-[700px] text-sm border-collapse border border-slate-300">
+                    <thead>
+                        <tr class="bg-slate-200 text-slate-800 text-xs uppercase font-bold">
+                            <th rowspan="2" class="border border-slate-300 px-3 py-2 text-left w-1/3">Cuenta</th>
+                            <th colspan="2" class="border border-slate-300 px-3 py-1.5 text-center">Totales (Movimientos)</th>
+                            <th colspan="2" class="border border-slate-300 px-3 py-1.5 text-center">Saldos</th>
+                        </tr>
+                        <tr class="bg-slate-100 text-slate-700 text-xs uppercase font-semibold">
+                            <th class="border border-slate-300 px-3 py-1.5 text-right">Debe</th>
+                            <th class="border border-slate-300 px-3 py-1.5 text-right">Haber</th>
+                            <th class="border border-slate-300 px-3 py-1.5 text-right">Deudor</th>
+                            <th class="border border-slate-300 px-3 py-1.5 text-right">Acreedor</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trial-balance-tbody"></tbody>
+                    <tfoot>
+                        <tr class="bg-slate-200 font-bold">
+                            <td class="border border-slate-300 px-3 py-2 text-right uppercase text-xs">Sumas Iguales</td>
+                            <td class="border border-slate-300 p-1.5"><input type="number" id="tb-sum-debe" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td>
+                            <td class="border border-slate-300 p-1.5"><input type="number" id="tb-sum-haber" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td>
+                            <td class="border border-slate-300 p-1.5"><input type="number" id="tb-sum-deudor" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td>
+                            <td class="border border-slate-300 p-1.5"><input type="number" id="tb-sum-acreedor" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- Paso 3 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div><span class="text-xs font-bold uppercase text-emerald-600">Paso 3</span><h2 class="text-lg font-bold text-slate-800">Estado de Resultados</h2></div>
+                <div class="flex items-center gap-2">
+                    <button onclick="showHint('is')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800 hover:bg-amber-200">Pista</button>
+                    <button onclick="checkIncomeStatement()" class="px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow">Comprobar Estado de Resultados</button>
+                </div>
+            </div>
+            <div class="p-6 max-w-3xl mx-auto">
+                <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead><tr class="bg-slate-800 text-white text-xs uppercase"><th class="border border-slate-300 px-4 py-2 text-left w-1/2">Concepto</th><th class="border border-slate-300 px-4 py-2 text-right w-1/4">Parcial</th><th class="border border-slate-300 px-4 py-2 text-right w-1/4">Total</th></tr></thead>
+                    <tbody>
+                        <tr class="bg-slate-100 font-bold"><td colspan="3" class="border border-slate-300 px-4 py-1.5">VENTAS</td></tr>
+                        <tr><td class="border border-slate-300 px-4 py-1.5 pl-8">Ventas</td><td class="border border-slate-300 p-1.5"><input type="number" id="is-ventas" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 bg-slate-50"></td></tr>
+                        <tr class="font-semibold bg-slate-50"><td class="border border-slate-300 px-4 py-1.5">TOTAL VENTAS</td><td class="border border-slate-300"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-total-ventas" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-semibold"></td></tr>
+                        <tr class="bg-slate-100 font-bold"><td colspan="3" class="border border-slate-300 px-4 py-1.5">COSTO DE VENTAS</td></tr>
+                        <tr><td class="border border-slate-300 px-4 py-1.5 pl-8">Costo de Ventas</td><td class="border border-slate-300 p-1.5"><input type="number" id="is-costo" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 bg-slate-50"></td></tr>
+                        <tr class="font-semibold bg-slate-50"><td class="border border-slate-300 px-4 py-1.5">TOTAL COSTO DE VENTAS</td><td class="border border-slate-300"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-total-costo" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-semibold"></td></tr>
+                        <tr class="bg-emerald-50 font-bold"><td class="border border-slate-300 px-4 py-2">RESULTADO EN OPERACIONES</td><td class="border border-slate-300"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-utilidad-bruta" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                        <tr class="bg-slate-100 font-bold"><td colspan="3" class="border border-slate-300 px-4 py-1.5">GASTOS</td></tr>
+                        <tr><td class="border border-slate-300 px-4 py-1.5 pl-8">Gasto por sueldos</td><td class="border border-slate-300 p-1.5"><input type="number" id="is-gasto-1" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 bg-slate-50"></td></tr>
+                        <tr class="font-semibold bg-slate-50"><td class="border border-slate-300 px-4 py-1.5">TOTAL GASTOS</td><td class="border border-slate-300"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-total-gastos" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-semibold"></td></tr>
+                        <tr class="bg-emerald-50 font-bold"><td class="border border-slate-300 px-4 py-2">RESULTADO ANTES DE IMPUESTOS</td><td class="border border-slate-300"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-antes-impuestos" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                        <tr><td class="border border-slate-300 px-4 py-1.5 font-semibold">IMPUESTO (ISR)</td><td class="border border-slate-300 p-1.5"><input type="number" id="is-isr-parcial" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-isr-total" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                        <tr class="bg-slate-800 text-white font-bold"><td class="border border-slate-300 px-4 py-2">UTILIDAD DEL EJERCICIO</td><td class="border border-slate-300 bg-slate-700"></td><td class="border border-slate-300 p-1.5"><input type="number" id="is-utilidad-neta" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold text-slate-900"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Paso 4 -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div><span class="text-xs font-bold uppercase text-emerald-600">Paso 4</span><h2 class="text-lg font-bold text-slate-800">Balance General</h2></div>
+                <div class="flex items-center gap-2">
+                    <button onclick="showHint('bs')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800 hover:bg-amber-200">Pista</button>
+                    <button onclick="checkBalanceSheet()" class="px-4 py-2 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow">Comprobar Balance General</button>
+                </div>
+            </div>
+            <div class="p-6 overflow-x-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 min-w-[650px]">
+                    <div class="border border-slate-300 rounded-xl overflow-hidden flex flex-col justify-between">
+                        <table class="w-full text-sm border-collapse">
+                            <thead><tr class="bg-slate-800 text-white text-xs uppercase"><th colspan="2" class="px-4 py-2 text-left">ACTIVO</th></tr></thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="bg-slate-100 font-bold text-xs uppercase"><td colspan="2" class="px-4 py-1.5">Activo Circulante</td></tr>
+                                <tr><td class="p-1.5 pl-4 w-3/5"><select id="bs-ac-1-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-ac-1-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-ac-2-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-ac-2-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-ac-3-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-ac-3-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr class="bg-emerald-50 font-bold"><td class="px-4 py-1.5 text-xs uppercase">Total Activo Circulante</td><td class="p-1.5"><input type="number" id="bs-total-ac" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                                <tr class="bg-slate-100 font-bold text-xs uppercase"><td colspan="2" class="px-4 py-1.5">Activo Fijo</td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-af-1-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-af-1-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr class="bg-emerald-50 font-bold"><td class="px-4 py-1.5 text-xs uppercase">Total Activo Fijo</td><td class="p-1.5"><input type="number" id="bs-total-af" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                            </tbody>
+                        </table>
+                        <div class="bg-slate-800 text-white p-3 flex items-center justify-between">
+                            <span class="font-bold text-xs uppercase">TOTAL ACTIVO</span>
+                            <input type="number" id="bs-total-activo" placeholder="$0" class="acc-input w-40 text-right px-2 py-1 rounded font-bold text-slate-900">
+                        </div>
+                    </div>
+
+                    <div class="border border-slate-300 rounded-xl overflow-hidden flex flex-col justify-between">
+                        <table class="w-full text-sm border-collapse">
+                            <thead><tr class="bg-slate-800 text-white text-xs uppercase"><th colspan="2" class="px-4 py-2 text-left">PASIVO Y CAPITAL</th></tr></thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="bg-slate-100 font-bold text-xs uppercase"><td colspan="2" class="px-4 py-1.5">Pasivo a CP</td></tr>
+                                <tr><td class="p-1.5 pl-4 w-3/5"><select id="bs-pcp-1-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-pcp-1-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-pcp-2-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-pcp-2-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr class="bg-emerald-50 font-bold"><td class="px-4 py-1.5 text-xs uppercase">Total Pasivo CP</td><td class="p-1.5"><input type="number" id="bs-total-pcp" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                                <tr class="bg-slate-100 font-bold text-xs uppercase"><td colspan="2" class="px-4 py-1.5">Pasivo a LP</td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-plp-1-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-plp-1-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr class="bg-emerald-50 font-bold"><td class="px-4 py-1.5 text-xs uppercase">Total Pasivo LP</td><td class="p-1.5"><input type="number" id="bs-total-plp" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                                <tr class="bg-slate-100 font-bold text-xs uppercase"><td colspan="2" class="px-4 py-1.5">Capital Contable</td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-cap-1-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-cap-1-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr><td class="p-1.5 pl-4"><select id="bs-cap-2-name" class="acc-input w-full px-2 py-1 rounded text-xs"></select></td><td class="p-1.5"><input type="number" id="bs-cap-2-val" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>
+                                <tr class="bg-emerald-50 font-bold"><td class="px-4 py-1.5 text-xs uppercase">Total Capital</td><td class="p-1.5"><input type="number" id="bs-total-cap" placeholder="$0" class="acc-input w-full text-right px-2 py-1 rounded font-bold"></td></tr>
+                            </tbody>
+                        </table>
+                        <div class="bg-slate-800 text-white p-3 flex items-center justify-between">
+                            <span class="font-bold text-xs uppercase">TOTAL PASIVO Y CAPITAL</span>
+                            <input type="number" id="bs-total-pasivo-capital" placeholder="$0" class="acc-input w-40 text-right px-2 py-1 rounded font-bold text-slate-900">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex items-center justify-between pt-4">
+            <a href="caso1.html" class="text-xs font-semibold text-slate-600 hover:text-emerald-600 flex items-center gap-1"><i data-lucide="arrow-left" class="w-4 h-4"></i> Anterior: Caso 1</a>
+            <a href="caso3.html" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold px-4 py-2.5 rounded-lg flex items-center gap-1.5">Siguiente: Caso 3 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+    </main>
+
+    <script>
+        const CASE_DATA = {
+            company: "TecnoSoluciones del Norte, S.A.",
+            intro: "La empresa “TecnoSoluciones del Norte, S.A.”, inicia operaciones el 1 de noviembre. Durante el mes realiza las siguientes operaciones (exentas de IVA):",
+            statements: [
+                "El 01 de noviembre: Los socios aportan $220,000 en efectivo depositados en bancos, y $120,000 en equipo de cómputo para venta (Almacén).",
+                "El 10 de noviembre: Se compran mercancías a crédito (Proveedores) por $45,000.",
+                "El 18 de noviembre: Se venden mercancías a crédito por $160,000. El costo de ventas de esta mercancía es de $78,000.",
+                "El 25 de noviembre: Se pagan sueldos del personal administrativo por $24,000 mediante transferencia.",
+                "El 28 de noviembre: Se adquiere mobiliario y equipo de oficina mediante préstamo bancario a largo plazo por $50,000.",
+                "El 30 de noviembre: Se provisiona el Impuesto Sobre la Renta (ISR) aplicando una tasa del 3.0% sobre las ventas del periodo."
+            ],
+            journal: [
+                { date: "01/11", num: "-01-", entries: [{ account: "Caja y Bancos", debe: 220000, haber: 0 }, { account: "Almacén", debe: 120000, haber: 0 }, { account: "Capital Social", debe: 0, haber: 340000, indent: true }]},
+                { date: "10/11", num: "-02-", entries: [{ account: "Almacén", debe: 45000, haber: 0 }, { account: "Proveedores", debe: 0, haber: 45000, indent: true }]},
+                { date: "18/11", num: "-03-", entries: [{ account: "Clientes", debe: 160000, haber: 0 }, { account: "Ventas", debe: 0, haber: 160000, indent: true }]},
+                { date: "18/11", num: "-04-", entries: [{ account: "Costo de Ventas", debe: 78000, haber: 0 }, { account: "Almacén", debe: 0, haber: 78000, indent: true }]},
+                { date: "25/11", num: "-05-", entries: [{ account: "Gasto por sueldos", debe: 24000, haber: 0 }, { account: "Caja y Bancos", debe: 0, haber: 24000, indent: true }]},
+                { date: "28/11", num: "-06-", entries: [{ account: "Mobiliario y Equipo", debe: 50000, haber: 0 }, { account: "Préstamo bancario", debe: 0, haber: 50000, indent: true }]},
+                { date: "30/11", num: "-07-", entries: [{ account: "Gastos de I.S.R.", debe: 4800, haber: 0 }, { account: "I.S.R. por pagar", debe: 0, haber: 4800, indent: true }]}
+            ],
+            accounts: [
+                { name: "Caja y Bancos", debe: [220000], haber: [24000], movDebe: 220000, movHaber: 24000, saldoDeudor: 196000, saldoAcreedor: 0 },
+                { name: "Almacén", debe: [120000, 45000], haber: [78000], movDebe: 165000, movHaber: 78000, saldoDeudor: 87000, saldoAcreedor: 0 },
+                { name: "Clientes", debe: [160000], haber: [], movDebe: 160000, movHaber: 0, saldoDeudor: 160000, saldoAcreedor: 0 },
+                { name: "Mobiliario y Equipo", debe: [50000], haber: [], movDebe: 50000, movHaber: 0, saldoDeudor: 50000, saldoAcreedor: 0 },
+                { name: "Proveedores", debe: [], haber: [45000], movDebe: 0, movHaber: 45000, saldoDeudor: 0, saldoAcreedor: 45000 },
+                { name: "I.S.R. por pagar", debe: [], haber: [4800], movDebe: 0, movHaber: 4800, saldoDeudor: 0, saldoAcreedor: 4800 },
+                { name: "Préstamo bancario", debe: [], haber: [50000], movDebe: 0, movHaber: 50000, saldoDeudor: 0, saldoAcreedor: 50000 },
+                { name: "Capital Social", debe: [], haber: [340000], movDebe: 0, movHaber: 340000, saldoDeudor: 0, saldoAcreedor: 340000 },
+                { name: "Ventas", debe: [], haber: [160000], movDebe: 0, movHaber: 160000, saldoDeudor: 0, saldoAcreedor: 160000 },
+                { name: "Costo de Ventas", debe: [78000], haber: [], movDebe: 78000, movHaber: 0, saldoDeudor: 78000, saldoAcreedor: 0 },
+                { name: "Gasto por sueldos", debe: [24000], haber: [], movDebe: 24000, movHaber: 0, saldoDeudor: 24000, saldoAcreedor: 0 },
+                { name: "Gastos de I.S.R.", debe: [4800], haber: [], movDebe: 4800, movHaber: 0, saldoDeudor: 4800, saldoAcreedor: 0 }
+            ],
+            incomeStatement: { ventas: 160000, costo: 78000, utilidadBruta: 82000, gasto1: 24000, antesImpuestos: 58000, isr: 4800, utilidadNeta: 53200 },
+            balanceSheet: {
+                ac: [{ name: "Caja y Bancos", val: 196000 }, { name: "Almacén", val: 87000 }, { name: "Clientes", val: 160000 }], totalAc: 443000,
+                af: [{ name: "Mobiliario y Equipo", val: 50000 }], totalAf: 50000, totalActivo: 493000,
+                pcp: [{ name: "Proveedores", val: 45000 }, { name: "I.S.R. por pagar", val: 4800 }], totalPcp: 49800,
+                plp: [{ name: "Préstamo bancario", val: 50000 }], totalPlp: 50000,
+                cap: [{ name: "Capital Social", val: 340000 }, { name: "Utilidad del Ejercicio", val: 53200 }], totalCap: 393200, totalPasivoCap: 493000
+            }
+        };
+
+        function parseVal(id) { const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+        function setValState(el, ok) { el.classList.remove('valid-cell', 'invalid-cell'); el.classList.add(ok ? 'valid-cell' : 'invalid-cell'); }
+        function showBanner(type, title, text) {
+            const b = document.getElementById('feedback-banner');
+            b.className = "rounded-xl p-4 border shadow-sm flex items-center justify-between " + (type === 'ok' ? "bg-green-50 border-green-300 text-green-900" : "bg-amber-50 border-amber-300 text-amber-900");
+            document.getElementById('feedback-title').textContent = title; document.getElementById('feedback-text').textContent = text; b.classList.remove('hidden');
+        }
+        function showHint(sec) {
+            const h = {
+                t: "Traslada cargos al Debe y abonos al Haber de cada Cuenta T.",
+                tb: "Las sumas iguales de movimientos deben dar $701,800 y las de saldos $599,800.",
+                is: "Ventas ($160,000) - Costo ($78,000) - Sueldos ($24,000) - ISR ($4,800) = Utilidad Neta.",
+                bs: "Total Activo ($493,000) debe igualar a Total Pasivo y Capital ($493,000)."
+            };
+            showBanner('hint', 'Pista Pedagógica — PrepaPráctica', h[sec]);
+        }
+        function init() {
+            document.getElementById('case-intro').textContent = CASE_DATA.intro;
+            document.getElementById('case-statements').innerHTML = CASE_DATA.statements.map(s => `<li>${s}</li>`).join('');
+            let totD = 0, totH = 0, jHtml = '';
+            CASE_DATA.journal.forEach(a => {
+                jHtml += `<tr class="bg-slate-50 font-semibold text-xs text-slate-600"><td class="py-1.5 px-3 border-r border-slate-300 text-center">${a.date}</td><td class="py-1.5 px-4 border-r border-slate-300 text-center font-bold">${a.num}</td><td class="border-r border-slate-300"></td><td></td></tr>`;
+                a.entries.forEach(e => {
+                    totD += e.debe; totH += e.haber;
+                    jHtml += `<tr><td class="py-1.5 px-3 border-r border-slate-300"></td><td class="py-1.5 px-4 border-r border-slate-300 ${e.indent ? 'pl-10 text-slate-700' : 'font-medium'}">${e.account}</td><td class="py-1.5 px-3 border-r border-slate-300 text-right font-mono text-xs">${e.debe ? '$' + e.debe.toLocaleString('es-MX') : ''}</td><td class="py-1.5 px-3 text-right font-mono text-xs">${e.haber ? '$' + e.haber.toLocaleString('es-MX') : ''}</td></tr>`;
+                });
+            });
+            document.getElementById('journal-tbody').innerHTML = jHtml;
+            document.getElementById('journal-tfoot').innerHTML = `<tr><td colspan="2" class="py-2 px-4 border-r border-slate-300 text-right text-xs uppercase">Totales</td><td class="py-2 px-3 border-r border-slate-300 text-right font-mono text-xs">$${totD.toLocaleString('es-MX')}</td><td class="py-2 px-3 text-right font-mono text-xs">$${totH.toLocaleString('es-MX')}</td></tr>`;
+            const opts = `<option value="">-- Seleccionar Cuenta --</option>` + CASE_DATA.accounts.map(a => `<option value="${a.name}">${a.name}</option>`).join('');
+            const bsOpts = `<option value="">-- Cuenta --</option>` + CASE_DATA.accounts.map(a => `<option value="${a.name}">${a.name}</option>`).join('') + `<option value="Utilidad del Ejercicio">Utilidad del Ejercicio</option>`;
+            const grid = document.getElementById('t-accounts-grid');
+            for (let i = 0; i < 12; i++) {
+                grid.innerHTML += `<div class="border-2 border-slate-800 rounded-xl overflow-hidden bg-white shadow-sm"><div class="bg-slate-200 p-2 border-b-2 border-slate-800"><select id="t-name-${i}" class="acc-input w-full text-xs font-bold text-center py-1 rounded">${opts}</select></div><div class="grid grid-cols-2 text-xs"><div class="border-r-2 border-slate-800 p-2 space-y-1.5"><div class="text-[10px] font-bold text-slate-400 uppercase text-center">Debe</div><input type="number" id="t-d-${i}-0" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded"><input type="number" id="t-d-${i}-1" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded"><div class="pt-1 border-t border-slate-300"><div class="text-[10px] font-semibold text-slate-500">Mov. Deudor</div><input type="number" id="t-md-${i}" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded font-semibold"></div><div><div class="text-[10px] font-bold text-emerald-700">Saldo Deudor</div><input type="number" id="t-sd-${i}" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded font-bold"></div></div><div class="p-2 space-y-1.5"><div class="text-[10px] font-bold text-slate-400 uppercase text-center">Haber</div><input type="number" id="t-h-${i}-0" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded"><input type="number" id="t-h-${i}-1" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded"><div class="pt-1 border-t border-slate-300"><div class="text-[10px] font-semibold text-slate-500">Mov. Acreedor</div><input type="number" id="t-mh-${i}" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded font-semibold"></div><div><div class="text-[10px] font-bold text-emerald-700">Saldo Acreedor</div><input type="number" id="t-sa-${i}" placeholder="0" class="acc-input w-full text-right px-1.5 py-1 rounded font-bold"></div></div></div></div>`;
+            }
+            const tbBody = document.getElementById('trial-balance-tbody');
+            for (let i = 0; i < 12; i++) {
+                tbBody.innerHTML += `<tr><td class="border border-slate-300 p-1.5"><select id="tb-name-${i}" class="acc-input w-full px-2 py-1 rounded text-xs">${opts}</select></td><td class="border border-slate-300 p-1.5"><input type="number" id="tb-d-${i}" placeholder="0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 p-1.5"><input type="number" id="tb-h-${i}" placeholder="0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 p-1.5"><input type="number" id="tb-sd-${i}" placeholder="0" class="acc-input w-full text-right px-2 py-1 rounded"></td><td class="border border-slate-300 p-1.5"><input type="number" id="tb-sa-${i}" placeholder="0" class="acc-input w-full text-right px-2 py-1 rounded"></td></tr>`;
+            }
+            ['bs-ac-1-name','bs-ac-2-name','bs-ac-3-name','bs-af-1-name','bs-pcp-1-name','bs-pcp-2-name','bs-plp-1-name','bs-cap-1-name','bs-cap-2-name'].forEach(id => document.getElementById(id).innerHTML = bsOpts);
+            lucide.createIcons();
+        }
+        function checkTAccounts() {
+            const used = new Set(); let allOk = true;
+            for (let i = 0; i < 12; i++) {
+                const sel = document.getElementById(`t-name-${i}`); const acc = CASE_DATA.accounts.find(a => a.name === sel.value);
+                if (!acc || used.has(acc.name)) { setValState(sel, false); [`t-d-${i}-0`,`t-d-${i}-1`,`t-h-${i}-0`,`t-h-${i}-1`,`t-md-${i}`,`t-mh-${i}`,`t-sd-${i}`,`t-sa-${i}`].forEach(id => setValState(document.getElementById(id), false)); allOk = false; continue; }
+                used.add(acc.name); setValState(sel, true);
+                const dVals = [parseVal(`t-d-${i}-0`), parseVal(`t-d-${i}-1`)].filter(v => v > 0).sort((a,b)=>a-b), expD = [...acc.debe].sort((a,b)=>a-b);
+                const dOk = dVals.length === expD.length && dVals.every((v,idx) => v === expD[idx]);
+                setValState(document.getElementById(`t-d-${i}-0`), dOk); setValState(document.getElementById(`t-d-${i}-1`), dOk);
+                const hVals = [parseVal(`t-h-${i}-0`), parseVal(`t-h-${i}-1`)].filter(v => v > 0).sort((a,b)=>a-b), expH = [...acc.haber].sort((a,b)=>a-b);
+                const hOk = hVals.length === expH.length && hVals.every((v,idx) => v === expH[idx]);
+                setValState(document.getElementById(`t-h-${i}-0`), hOk); setValState(document.getElementById(`t-h-${i}-1`), hOk);
+                const mdOk = parseVal(`t-md-${i}`) === acc.movDebe, mhOk = parseVal(`t-mh-${i}`) === acc.movHaber, sdOk = parseVal(`t-sd-${i}`) === acc.saldoDeudor, saOk = parseVal(`t-sa-${i}`) === acc.saldoAcreedor;
+                setValState(document.getElementById(`t-md-${i}`), mdOk); setValState(document.getElementById(`t-mh-${i}`), mhOk); setValState(document.getElementById(`t-sd-${i}`), sdOk); setValState(document.getElementById(`t-sa-${i}`), saOk);
+                if (!(dOk && hOk && mdOk && mhOk && sdOk && saOk)) allOk = false;
+            }
+            showBanner(allOk ? 'ok' : 'hint', allOk ? '¡Cuentas T Correctas!' : 'Revisa las celdas en rojo', allOk ? 'Pases al Mayor completados.' : 'Revisa sumas y saldos en rojo.');
+        }
+        function checkTrialBalance() {
+            const used = new Set(); let allOk = true;
+            for (let i = 0; i < 12; i++) {
+                const sel = document.getElementById(`tb-name-${i}`); const acc = CASE_DATA.accounts.find(a => a.name === sel.value);
+                if (!acc || used.has(acc.name)) { setValState(sel, false); [`tb-d-${i}`,`tb-h-${i}`,`tb-sd-${i}`,`tb-sa-${i}`].forEach(id => setValState(document.getElementById(id), false)); allOk = false; continue; }
+                used.add(acc.name); setValState(sel, true);
+                const ok1 = parseVal(`tb-d-${i}`) === acc.movDebe, ok2 = parseVal(`tb-h-${i}`) === acc.movHaber, ok3 = parseVal(`tb-sd-${i}`) === acc.saldoDeudor, ok4 = parseVal(`tb-sa-${i}`) === acc.saldoAcreedor;
+                setValState(document.getElementById(`tb-d-${i}`), ok1); setValState(document.getElementById(`tb-h-${i}`), ok2); setValState(document.getElementById(`tb-sd-${i}`), ok3); setValState(document.getElementById(`tb-sa-${i}`), ok4);
+                if (!(ok1 && ok2 && ok3 && ok4)) allOk = false;
+            }
+            const totD = CASE_DATA.accounts.reduce((s,a)=>s+a.movDebe,0), totSD = CASE_DATA.accounts.reduce((s,a)=>s+a.saldoDeudor,0);
+            const s1 = parseVal('tb-sum-debe') === totD, s2 = parseVal('tb-sum-haber') === totD, s3 = parseVal('tb-sum-deudor') === totSD, s4 = parseVal('tb-sum-acreedor') === totSD;
+            setValState(document.getElementById('tb-sum-debe'), s1); setValState(document.getElementById('tb-sum-haber'), s2); setValState(document.getElementById('tb-sum-deudor'), s3); setValState(document.getElementById('tb-sum-acreedor'), s4);
+            if (!(s1 && s2 && s3 && s4)) allOk = false;
+            showBanner(allOk ? 'ok' : 'hint', allOk ? '¡Balance Cuadrado!' : 'Revisa las celdas en rojo', allOk ? 'Movimientos y saldos correctos.' : 'Verifica tus sumas iguales.');
+        }
+        function checkIncomeStatement() {
+            const is = CASE_DATA.incomeStatement; let allOk = true;
+            [['is-ventas', is.ventas], ['is-total-ventas', is.ventas], ['is-costo', is.costo], ['is-total-costo', is.costo], ['is-utilidad-bruta', is.utilidadBruta], ['is-gasto-1', is.gasto1], ['is-total-gastos', is.gasto1], ['is-antes-impuestos', is.antesImpuestos], ['is-isr-parcial', is.isr], ['is-isr-total', is.isr], ['is-utilidad-neta', is.utilidadNeta]].forEach(([id, exp]) => {
+                const ok = parseVal(id) === exp; setValState(document.getElementById(id), ok); if (!ok) allOk = false;
+            });
+            showBanner(allOk ? 'ok' : 'hint', allOk ? '¡Estado de Resultados Correcto!' : 'Revisa las celdas en rojo', allOk ? 'Utilidad del ejercicio verificada.' : 'Verifica tus operaciones.');
+        }
+        function checkBalanceSheet() {
+            const bs = CASE_DATA.balanceSheet; let allOk = true;
+            function checkGroup(prefix, items) {
+                const used = new Set();
+                for (let i = 1; i <= items.length; i++) {
+                    const sel = document.getElementById(`${prefix}-${i}-name`), inp = document.getElementById(`${prefix}-${i}-val`), found = items.find(it => it.name === sel.value);
+                    if (!found || used.has(found.name)) { setValState(sel, false); setValState(inp, false); allOk = false; }
+                    else { used.add(found.name); setValState(sel, true); const ok = parseVal(`${prefix}-${i}-val`) === found.val; setValState(inp, ok); if (!ok) allOk = false; }
+                }
+            }
+            checkGroup('bs-ac', bs.ac); checkGroup('bs-af', bs.af); checkGroup('bs-pcp', bs.pcp); checkGroup('bs-plp', bs.plp); checkGroup('bs-cap', bs.cap);
+            [['bs-total-ac', bs.totalAc], ['bs-total-af', bs.totalAf], ['bs-total-activo', bs.totalActivo], ['bs-total-pcp', bs.totalPcp], ['bs-total-plp', bs.totalPlp], ['bs-total-cap', bs.totalCap], ['bs-total-pasivo-capital', bs.totalPasivoCap]].forEach(([id, exp]) => {
+                const ok = parseVal(id) === exp; setValState(document.getElementById(id), ok); if (!ok) allOk = false;
+            });
+            showBanner(allOk ? 'ok' : 'hint', allOk ? '¡Balance General Cuadrado!' : 'Revisa las celdas en rojo', allOk ? 'Ecuación contable verificada.' : 'Revisa la clasificación de cuentas.');
+        }
+        function downloadAnswerKey() {
+            const txt = `PREPAPRÁCTICA - CLAVE CASO 2: TecnoSoluciones del Norte, S.A.\nMovimientos: $701,800 | Saldos: $599,800 | Utilidad Neta: $53,200 | Total Activo / Pasivo+Capital: $493,000`;
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/plain;charset=utf-8' })); a.download = 'PrepaPractica_Clave_Caso_2.txt'; a.click();
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>
